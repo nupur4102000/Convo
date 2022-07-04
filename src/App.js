@@ -1,6 +1,9 @@
 
       
 
+     
+      
+
      import { useEffect, useRef, useState } from "react";
      import {
        Box,
@@ -132,12 +135,17 @@
                  </form>
                </VStack>
              </Container>
-           ) : (
-             <VStack bg="white" justifyContent={"center"} h="100vh">
+           ) : (<div backgroundColor="pink">
+            <VStack  bg="pink" justifyContent={"center"} h="35vh" >
+              <p style={{fontSize:"50px",fontWeight:"bold" ,fontFamily:'cursive',color:"darkblue"}}>Welcome to Convo</p>
+              <p style={{fontSize:"25px",fontWeight:"revert-layer" ,fontFamily:'cursive'}}>Real-time  chat application</p>
+            </VStack>
+             <VStack bg="pink" justifyContent={"center"} h="25vh">
                <Button onClick={loginHandler} colorScheme={"purple"}>
                  Sign In With Google
                </Button>
              </VStack>
+             </div>
            )}
          </Box>
        );
