@@ -75,27 +75,27 @@
          }
        };
      
-//        useEffect(() => {
-//          const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
+       useEffect(() => {
+         const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
      
-//          const unsubscribe = onAuthStateChanged(auth, (data) => {
-//            setUser(data);
-//          });
+         const unsubscribe = onAuthStateChanged(auth, (data) => {
+           setUser(data);
+         });
      
-//          const unsubscribeForMessage = onSnapshot(q, (snap) => {
-//            setMessages(
-//              snap.docs.map((item) => {
-//                const id = item.id;
-//                return { id, ...item.data() };
-//              })
-//            );
-//          });
+         const unsubscribeForMessage = onSnapshot(q, (snap) => {
+           setMessages(
+             snap.docs.map((item) => {
+               const id = item.id;
+               return { id, ...item.data() };
+             })
+           );
+         });
      
-//          return () => {
-//            unsubscribe();
-//            unsubscribeForMessage();
-//          };
-//        }, []);
+         return () => {
+           unsubscribe();
+           unsubscribeForMessage();
+         };
+       }, []);
      
        return (
          <Box bg={"red.50"}>
