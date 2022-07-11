@@ -69,7 +69,7 @@
        };
      
        useEffect(() => {
-         const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
+         const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
      
          const unsubscribe = onAuthStateChanged(auth, (data) => {
            setUser(data);
@@ -138,7 +138,7 @@
            ) : (<div backgroundColor="pink">
             <VStack  bg="pink" justifyContent={"center"} h="35vh" >
               <p style={{fontSize:"50px",fontWeight:"bold" ,fontFamily:'cursive',color:"darkblue"}}>Welcome to Convo</p>
-              <p style={{fontSize:"25px",fontWeight:"revert-layer" ,fontFamily:'cursive'}}>Real-time  chat application</p>
+              <p style={{fontSize:"25px" ,fontFamily:'cursive'}}>Real-time  chat application</p>
             </VStack>
              <VStack bg="pink" justifyContent={"center"} h="25vh">
                <Button onClick={loginHandler} colorScheme={"purple"}>
