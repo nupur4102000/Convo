@@ -1,7 +1,5 @@
 
-      
-
-     
+    
       
 
      import { useEffect, useRef, useState } from "react";
@@ -11,6 +9,7 @@
        Container,
        HStack,
        Input,
+       StatHelpText,
        VStack,
      } from "@chakra-ui/react";
      import Messag from "./Components/Messag";
@@ -35,18 +34,25 @@
      const auth = getAuth(app);
      const db = getFirestore(app);
      
-     const loginHandler = () => {
-       const provider = new GoogleAuthProvider();
-       signInWithPopup(auth, provider);
-     };
      
-     const logoutHandler = () => signOut(auth);
      
      function App() {
        const [user, setUser] = useState(false);
+       
        const [message, setMessage] = useState("");
        const [messages, setMessages] = useState([]);
-     
+       const loginHandler = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider);
+        setMessages([]);
+      };
+      
+      const logoutHandler = () => {
+        
+       signOut(auth);
+
+      
+      }
        const divForScroll = useRef(null);
      
        const submitHandler = async (e) => {
@@ -54,6 +60,7 @@
      
          try {
            setMessage("");
+           
      
            await addDoc(collection(db, "Messages"), {
              text: message,
@@ -68,7 +75,27 @@
          }
        };
      
+      //  useEffect(() => {
+      //    const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
      
+      //    const unsubscribe = onAuthStateChanged(auth, (data) => {
+      //      setUser(data);
+      //    });
+     
+      //    const unsubscribeForMessage = onSnapshot(q, (snap) => {
+      //      setMessages(
+      //        snap.docs.map((item) => {
+      //          const id = item.id;
+      //          return { id, ...item.data() };
+      //        })
+      //      );
+      //    });
+     
+      //    return () => {
+      //      unsubscribe();
+      //      unsubscribeForMessage();
+      //    };
+      //  }, []);
      
        return (
          <Box bg={"red.50"}>
@@ -90,7 +117,8 @@
                    }}
                  >
                    {messages.map((item) => (
-                     <Messag
+                     <Messag 
+                       
                        key={item.id}
                        user={item.uid === user.uid ? "me" : "other"}
                        text={item.text}
@@ -101,12 +129,12 @@
                    <div ref={divForScroll}></div>
                  </VStack>
      
-                 <form onSubmit={submitHandler} style={{ width: "100%" }}>
+                 <form onSubmit={submitHandler}  style={{ width: "100%" }}>
                    <HStack>
                      <Input
                        value={message}
                        onChange={(e) => setMessage(e.target.value)}
-                       placeholder="Enter a Message..."
+                       placeholder="Start new convo ..."
                      />
                      <Button colorScheme={"purple"} type="submit">
                        Send
@@ -118,7 +146,7 @@
            ) : (<div backgroundColor="pink">
             <VStack  bg="pink" justifyContent={"center"} h="35vh" >
               <p style={{fontSize:"50px",fontWeight:"bold" ,fontFamily:'cursive',color:"darkblue"}}>Welcome to Convo</p>
-              <p style={{fontSize:"25px" ,fontFamily:'cursive'}}>Real-time  chat application</p>
+              <p style={{fontSize:"25px",fontWeight:"revert-layer" ,fontFamily:'cursive'}}>Real-time  chat application</p>
             </VStack>
              <VStack bg="pink" justifyContent={"center"} h="25vh">
                <Button onClick={loginHandler} colorScheme={"purple"}>
