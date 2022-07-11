@@ -71,11 +71,11 @@
        useEffect(() => {
          const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
      
-         const unsubscribe = onAuthStateChanged(auth, (data) => {
+         cons userstateChange = onAuthStateChanged(auth, (data) => {
            setUser(data);
          });
      
-         const unsubscribeForMessage = onSnapshot(q, (snap) => {
+         const renderMessage = onSnapshot(q, (snap) => {
            setMessages(
              snap.docs.map((item) => {
                const id = item.id;
@@ -85,8 +85,8 @@
          });
      
          return () => {
-           unsubscribe();
-           unsubscribeForMessage();
+           userstatechange();
+            renderMessage();
          };
        }, []);
      
