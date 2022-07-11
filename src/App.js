@@ -68,27 +68,7 @@
          }
        };
      
-       useEffect(() => {
-         const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
      
-         cons userstateChange = onAuthStateChanged(auth, (data) => {
-           setUser(data);
-         });
-     
-         const renderMessage = onSnapshot(q, (snap) => {
-           setMessages(
-             snap.docs.map((item) => {
-               const id = item.id;
-               return { id, ...item.data() };
-             })
-           );
-         });
-     
-         return () => {
-           userstateChange();
-            renderMessage();
-         };
-       }, []);
      
        return (
          <Box bg={"red.50"}>
