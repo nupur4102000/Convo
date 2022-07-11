@@ -69,7 +69,7 @@
        };
      
        useEffect(() => {
-         const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
+         const q = query(collection(db, "Messages"), orderBy("createdAt", "asc"));
      
          cons userstateChange = onAuthStateChanged(auth, (data) => {
            setUser(data);
@@ -85,7 +85,7 @@
          });
      
          return () => {
-           userstatechange();
+           userstateChange();
             renderMessage();
          };
        }, []);
