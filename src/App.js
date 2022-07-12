@@ -126,7 +126,7 @@
                      />
                    ))}
      
-                   <div ref={divForScroll}></div>
+                   
                  </VStack>
      
                  <form onSubmit={submitHandler}  style={{ width: "100%" }}>
